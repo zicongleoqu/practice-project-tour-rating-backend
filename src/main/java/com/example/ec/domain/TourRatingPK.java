@@ -16,4 +16,9 @@ public class TourRatingPK implements Serializable {
 
     public TourRatingPK() {
     }
+
+    public TourRatingPK(Tour tour, Integer customerId) {
+        this.tour = tour;
+        this.customerId = customerId;
+    }
 }

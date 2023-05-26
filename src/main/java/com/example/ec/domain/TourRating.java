@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 public class TourRating {
 
     @EmbeddedId
-    private TourRatingPK pK;
+    private TourRatingPK PK;
 
     @Column(nullable = false)
     private Integer score;
@@ -16,6 +16,35 @@ public class TourRating {
     @Column
     private String comment;
 
+    public TourRating(TourRatingPK PK, Integer score, String comment) {
+        this.PK = PK;
+        this.score = score;
+        this.comment = comment;
+    }
 
+    public TourRating() {}
 
+    public TourRatingPK getpK() {
+        return PK;
+    }
+
+    public void setpK(TourRatingPK pK) {
+        this.PK = pK;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

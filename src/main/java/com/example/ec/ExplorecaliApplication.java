@@ -38,5 +38,7 @@ public class ExplorecaliApplication implements CommandLineRunner{
 		tourPackageService.createTourPackage("NW", "Nature Watch");
 		tourPackageService.createTourPackage("SC", "Snowboard Cali");
 		tourPackageService.createTourPackage("TC", "Taste of California");
+		tourService.createTour("title", "description", "blurb", 123, "duration"
+		,"bullets", "keywords", "BC", Difficulty.Difficult, Region.Southern_California);
 	}
 }
