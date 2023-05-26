@@ -5,12 +5,16 @@ import com.example.ec.domain.TourRating;
 import com.example.ec.domain.TourRatingPK;
 import com.example.ec.repo.TourRatingRepository;
 import com.example.ec.repo.TourRepository;
+import com.example.ec.web.RatingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/tours/{tourId}/ratings")
@@ -34,6 +38,22 @@ public class TourRatingController {
         Tour tour = verifytour(tourId);
         tourRatingRepository.save(new TourRating(new TourRatingPK(tour, ratingDto.getCustomerId()),
                 ratingDto.getScore(), ratingDto.getComment()));
+    }
+
+    @GetMapping
+    public List<RatingDto> getAllRatingsForTour(@PathVariable(value = "tourId") int tourId) {
+        verifytour(tourId);
+        return tourRatingRepository.findByPKTourId(tourId).stream()
+                .map(RatingDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping(path="/average")
+    public Map<String, Double> getAverage(@PathVariable(value = "tourId") int tourId) {
+        verifytour(tourId);
+        return Map.of("average", tourRatingRepository.findByPKTourId(tourId).stream()
+                .mapToInt(TourRating::getScore).average()
+                .orElseThrow(()->
+                        new NoSuchElementException("Tour has no Ratings")));
     }
 
     private Tour verifytour(int tourId) throws NoSuchElementException {

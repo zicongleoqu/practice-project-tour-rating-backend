@@ -1,5 +1,6 @@
 package com.example.ec.web;
 
+import com.example.ec.domain.TourRating;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +17,22 @@ public class RatingDto {
 
     @NotNull
     private Integer customerId;
+
+    public RatingDto() {
+
+    }
+
+    public RatingDto(Integer score, String comment, Integer customerId) {
+        this.score = score;
+        this.comment = comment;
+        this.customerId = customerId;
+    }
+
+    public RatingDto(TourRating tourRating) {
+        this.score = tourRating.getScore();
+        this.comment = tourRating.getComment();
+        this.customerId = tourRating.getpK().getCustomerId();
+    }
 
     public Integer getScore() {
         return score;
