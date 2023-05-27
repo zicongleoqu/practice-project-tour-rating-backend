@@ -2,6 +2,8 @@ package com.example.ec.repo;
 
 import com.example.ec.domain.TourRating;
 import com.example.ec.domain.TourRatingPK;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -13,6 +15,8 @@ public interface TourRatingRepository extends CrudRepository<TourRating, TourRat
     List<TourRating> findByPKTourId(Integer tourId);
 
     Optional<TourRating> findByPKTourIdAndPKCustomerId(Integer tourId, Integer customerId);
+
+    Page<TourRating> findByPKTourId(Integer tourId, Pageable pageable);
 }
 
 
