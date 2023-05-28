@@ -1,0 +1,23 @@
+[{
+  "packageType": "Backpack Cal",
+  "title": "Big SUr Retreat",
+  "blurb": "Big Sur is big country.",
+  "Description": "The region know as Big Sur",
+  "difficulty": "Medium",
+  "length": "3 days",
+  "price": "750",
+  "region": "Central East",
+  "keywords": "Hiking, National Parks, Big Sur"
+},
+{
+  "packageType": "California Calm",
+  "title": "Day Spa Package",
+  "blurb": "Trying to pack some serious relaxation into a short timeframe? Try our Day Spa Package",
+  "Description": "The Day Spa Package: One day, one spa, but not just any day or any other spa.",
+  "audience": "Girl Friend getaway",
+  "keywords": "Spa, Relaxation, Ojai, Art, Yoga",
+  "price": "550",
+  "region": "Southern California",
+  "surcharge": "100"
+}
+]

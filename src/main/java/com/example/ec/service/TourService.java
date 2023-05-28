@@ -1,13 +1,14 @@
 package com.example.ec.service;
 
-import com.example.ec.domain.Difficulty;
-import com.example.ec.domain.Region;
 import com.example.ec.domain.Tour;
 import com.example.ec.domain.TourPackage;
 import com.example.ec.repo.TourRepository;
 import com.example.ec.repo.TourPackageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class TourService {
@@ -21,15 +22,12 @@ public class TourService {
         this.tourPackageRepository = tourPackageRepository;
     }
 
-    public Tour createTour(String title, String description, String blurb,
-                           Integer price, String duration, String bullets,
-                           String keywords, String tourPackageName,
-                           Difficulty difficulty, Region region) {
-        TourPackage tourPackage = tourPackageRepository.findById(tourPackageName)
-                .orElseThrow(() -> new RuntimeException("Tour package does not exist"));
+    public Tour createTour(String title, String tourPackageName,
+                           Map<String, String> details) {
+        TourPackage tourPackage = tourPackageRepository.findByName(tourPackageName)
+                .orElseThrow(() -> new RuntimeException("Tour package does not exist: " + tourPackageName));
 
-        return tourRepository.save(new Tour(title, description, blurb, price, duration, bullets, keywords, tourPackage, difficulty, region));
+        return tourRepository.save(new Tour(title, tourPackage, details));
     }
 
-    public long total() {return tourRepository.count();}
 }

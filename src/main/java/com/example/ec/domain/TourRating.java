@@ -1,35 +1,62 @@
 package com.example.ec.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 public class TourRating {
 
-    @EmbeddedId
-    private TourRatingPK PK;
+    @Id
+    private String id;
 
-    @Column(nullable = false)
+    private String tourId;
+
+    @NotNull
+    private Integer customerId;
+
+    @Min(0)
+    @Max(5)
     private Integer score;
 
-    @Column
+    @Size(max = 255)
     private String comment;
 
-    public TourRating(TourRatingPK PK, Integer score, String comment) {
-        this.PK = PK;
+    public TourRating(String tourId, Integer customerId, Integer score, String comment) {
+        this.id = id;
+        this.tourId = tourId;
+        this.customerId = customerId;
         this.score = score;
         this.comment = comment;
     }
 
     public TourRating() {}
 
-    public TourRatingPK getpK() {
-        return PK;
+    public String getId() {
+        return id;
     }
 
-    public void setpK(TourRatingPK pK) {
-        this.PK = pK;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTourId() {
+        return tourId;
+    }
+
+    public void setTourId(String tourId) {
+        this.tourId = tourId;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public Integer getScore() {
